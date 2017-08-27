@@ -8,6 +8,8 @@ Make sure you have Python [installed properly](http://install.python-guide.org).
 
 ```sh
 
+$ mkvirtualenv -p /usr/bin/python3 backent
+$ pip install -U pip setuptools
 $ pip install -r requirements.txt
 
 $ createdb backent

@@ -1,20 +1,42 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.auth import get_user_model
 
-from .models import Greeting
+from rest_framework import routers
+from rest_framework import viewsets
 
-# Create your views here.
-def index(request):
-    # return HttpResponse('Hello from Python!')
-    return render(request, 'index.html')
+from . import models
+from .serializers import (
+    EventSerializer,
+    LocationSerializer,
+    OrganizationSerializer,
+    UserSerializer,
+)
 
 
-def db(request):
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = models.Event.objects.all()
+    serializer_class = EventSerializer
+    lookup_field = 'slug'
 
-    greeting = Greeting()
-    greeting.save()
 
-    greetings = Greeting.objects.all()
+class LocationViewSet(viewsets.ModelViewSet):
+    queryset = models.Location.objects.all()
+    serializer_class = LocationSerializer
+    lookup_field = 'slug'
 
-    return render(request, 'db.html', {'greetings': greetings})
 
+class OrganizationViewSet(viewsets.ModelViewSet):
+    queryset = models.Organization.objects.all()
+    serializer_class = OrganizationSerializer
+    lookup_field = 'slug'
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = models.User.objects.all()
+    serializer_class = UserSerializer
+
+
+router = routers.DefaultRouter()
+router.register(r'events', EventViewSet)
+router.register(r'locations', LocationViewSet)
+router.register(r'organizations', OrganizationViewSet)
+router.register(r'users', UserViewSet)

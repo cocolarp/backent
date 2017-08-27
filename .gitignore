@@ -3,5 +3,6 @@ venv
 staticfiles
 .env
 db.sqlite3
-
+*.json
+*.jpeg
 /Pipfile

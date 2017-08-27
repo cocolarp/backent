@@ -3,10 +3,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-import backent.views
+from .views import router
+
 
 urlpatterns = [
-    url(r'^$', backent.views.index, name='index'),
-    url(r'^db', backent.views.db, name='db'),
+    url(r'api/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
 ]
