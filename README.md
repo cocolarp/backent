@@ -24,8 +24,12 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ## Deploying to Heroku
 
+Use the cedar-14 stack as the current one is not yet suitable for GEOS.
+https://blog.trailblazingtech.com/running-geodjango-on-heroku-august-2017-aee97fbb7f7c
+
 ```sh
 $ heroku create
+$ heroku config:set BUILD_WITH_GEO_LIBRARIES=1
 $ git push heroku master
 
 $ heroku run python manage.py migrate
