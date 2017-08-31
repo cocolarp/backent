@@ -3,8 +3,7 @@
 A Backend for Events.
 
 ## Running Locally
-
-Make sure you have Python [installed properly](http://install.python-guide.org).  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+Install the [Heroku Toolbelt](https://toolbelt.heroku.com/) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
 
 ```sh
 
@@ -22,22 +21,27 @@ $ heroku local
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
-## Deploying to Heroku
+
+## Deploying
 
 Use the cedar-14 stack as the current one is not yet suitable for GEOS.
 https://blog.trailblazingtech.com/running-geodjango-on-heroku-august-2017-aee97fbb7f7c
 
 ```sh
 $ heroku create
-$ heroku config:set BUILD_WITH_GEO_LIBRARIES=1
-$ git push heroku master
 
-$ heroku run python manage.py migrate
+$ make deploy
+
 $ heroku open
 ```
-or
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+##  Troubleshooting
+
+```sh
+$ heroku config:set VAR=xxx VAR2=yyy
+$ heroku pg:reset DATABASE_URL
+```
+
 
 ## Documentation
 

@@ -101,6 +101,7 @@ DATABASES = {
     }
 }
 db_from_env = dj_database_url.config(conn_max_age=500)
+db_from_env.pop('ENGINE', None)  # ensure we keep using postgis
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['TEST'] = {'NAME': DATABASES['default']['NAME']}
 

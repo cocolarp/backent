@@ -26,3 +26,9 @@ initdb:
 
 resetdb: initdb
 	./manage.py migrate
+
+
+deploy:
+	heroku config:set BUILD_WITH_GEO_LIBRARIES=1
+	git push heroku master
+	heroku run python manage.py migrate
