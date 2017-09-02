@@ -7,3 +7,5 @@ pylint
 djangorestframework
 django-countries
 pillow
+requests
+django-widget-tweaks

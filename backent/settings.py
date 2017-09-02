@@ -56,6 +56,7 @@ INSTALLED_APPS = (
 
     'django_countries',
     'rest_framework',
+    'widget_tweaks',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -112,3 +113,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('GOOGLE_RECAPTCHA_SECRET_KEY', None)
+HAS_RECAPTCHA = GOOGLE_RECAPTCHA_SECRET_KEY is not None
