@@ -57,14 +57,3 @@ class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'currency'
         )
-
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = models.User
-        fields = (
-            'url',
-            'avatar',
-            'username',
-            'location',
-        )

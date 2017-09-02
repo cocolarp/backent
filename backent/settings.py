@@ -52,6 +52,7 @@ WSGI_APPLICATION = 'backent.wsgi.application'
 
 INSTALLED_APPS = (
     'backent',
+    'backent.api',
 
     'django_countries',
     'rest_framework',

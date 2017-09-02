@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from .views import router
+from backent.api.views import router
 
 
 urlpatterns = [

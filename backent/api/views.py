@@ -8,7 +8,6 @@ from .serializers import (
     EventSerializer,
     LocationSerializer,
     OrganizationSerializer,
-    UserSerializer,
 )
 
 
@@ -30,13 +29,7 @@ class OrganizationViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = models.User.objects.all()
-    serializer_class = UserSerializer
-
-
 router = routers.DefaultRouter()
 router.register(r'events', EventViewSet)
 router.register(r'locations', LocationViewSet)
 router.register(r'organizations', OrganizationViewSet)
-router.register(r'users', UserViewSet)

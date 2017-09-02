@@ -1,6 +1,6 @@
 [
     {
-        "model": "backent.organization",
+        "model": "backent_api.organization",
         "pk": 1,
         "fields": {
             "slug": "cocolarp",
@@ -9,7 +9,7 @@
         }
     },
     {
-        "model": "backent.location",
+        "model": "backent_api.location",
         "pk": 1,
         "fields": {
             "slug": "chateau-rouge",
@@ -41,7 +41,7 @@
         }
     },
     {
-        "model": "backent.event",
+        "model": "backent_api.event",
         "pk": 1,
         "fields": {
             "slug": "some-metalarp",
