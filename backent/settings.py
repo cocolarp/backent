@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'corsheaders',
     'django_countries',
     'rest_framework',
+    'rest_framework.authtoken',
     'widget_tweaks',
 
     'django.contrib.admin',
@@ -114,7 +115,10 @@ CORS_ORIGIN_ALLOW_ALL = os.environ.get('CORS_ORIGIN_ALLOW_ALL', True)
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
 GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('GOOGLE_RECAPTCHA_SECRET_KEY', None)

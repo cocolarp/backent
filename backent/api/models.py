@@ -1,10 +1,14 @@
+from django.conf import settings
 from django.contrib.gis.db import models as gis_models
 from django.db import models
 from django.db import IntegrityError
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from django_countries.fields import CountryField
+from rest_framework.authtoken.models import Token
 
 
 CURRENCY_EUR = 'EUR'
@@ -75,3 +79,9 @@ class Location(NameSlugMixin):
 
     def __str__(self):
         return "{0.address}, {0.zipcode}, {0.country}".format(self)
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
