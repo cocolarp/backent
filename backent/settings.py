@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'backent',
     'backent.api',
 
+    'corsheaders',
     'django_countries',
     'rest_framework',
     'widget_tweaks',
@@ -68,6 +69,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -107,6 +109,7 @@ db_from_env.pop('ENGINE', None)  # ensure we keep using postgis
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['TEST'] = {'NAME': DATABASES['default']['NAME']}
 
+CORS_ORIGIN_ALLOW_ALL = os.environ.get('CORS_ORIGIN_ALLOW_ALL', True)
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

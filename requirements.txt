@@ -9,3 +9,4 @@ django-countries
 pillow
 requests
 django-widget-tweaks
+django-cors-headers
