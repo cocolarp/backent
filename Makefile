@@ -8,6 +8,13 @@ clean:
 
 setup: update resetdb
 
+prepare:
+	python manage.py migrate --noinput
+	python manage.py collectstatic --noinput
+
+serve: prepare
+	python manage.py runserver
+
 
 update:
 	pip install -U pip setuptools
@@ -26,7 +33,7 @@ initdb:
 
 resetdb: initdb
 	./manage.py migrate
-
+	./manage.py loaddata initial-fixture.json
 
 deploy:
 	heroku config:set BUILD_WITH_GEO_LIBRARIES=1
