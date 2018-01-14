@@ -58,7 +58,7 @@ class Event(NameSlugMixin):
     summary = models.TextField()
     description = models.TextField()
     external_url = models.URLField(max_length=255)
-    price = models.IntegerField()
+    price = models.IntegerField(help_text="Price in cents of the default currency")
     start = models.DateTimeField(verbose_name=_(u"start"))
     end = models.DateTimeField(verbose_name=_(u"end"))
 

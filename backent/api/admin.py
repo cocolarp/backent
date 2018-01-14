@@ -25,3 +25,6 @@ class EventAdmin(admin.ModelAdmin):
     formfield_overrides = {
         django_models.DateTimeField: {'widget': MyDate},
     }
+
+
+admin.site.register(models.EventLike)
