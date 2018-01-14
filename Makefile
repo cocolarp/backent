@@ -2,6 +2,7 @@ PROJECT := backent
 
 
 clean:
+	rm -rf $(PROJECT)/staticfiles
 	find . -name "*.pyc" -delete
 	find . -name "__pycache__" -delete
 
