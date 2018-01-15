@@ -60,7 +60,15 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
         )
 
 
+class LikedEventSerializer(serializers.RelatedField):
+
+    def to_representation(self, value):
+        return value.event.slug
+
+
 class CurrentUserSerializer(serializers.ModelSerializer):
+
+    events = LikedEventSerializer(many=True, read_only=True, source='likes')
 
     class Meta:
         model = get_user_model()
@@ -69,4 +77,5 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             'avatar',
             'first_name',
             'last_name',
+            'events',
         )
