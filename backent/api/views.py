@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 
+from rest_framework.decorators import detail_route
 from rest_framework import generics
 from rest_framework import routers
 from rest_framework import status
@@ -19,6 +20,18 @@ class EventViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Event.objects.all()
     serializer_class = EventSerializer
     lookup_field = 'slug'
+
+    @detail_route(methods=['post'])
+    def like(self, request, slug=None):
+        event = self.get_object()
+        like, created = models.EventLike.objects.get_or_create(
+            event=event,
+            user=request.user,
+        )
+        if not created:
+            like.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({}, status=status.HTTP_201_CREATED)
 
 
 class LocationViewSet(viewsets.ReadOnlyModelViewSet):
