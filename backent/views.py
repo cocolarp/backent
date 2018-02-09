@@ -1,8 +1,13 @@
+import json
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 import requests
 
@@ -53,3 +58,17 @@ def signup(request):
         'form': form,
         'has_recaptcha': settings.HAS_RECAPTCHA,
     })
+
+
+@require_POST
+@csrf_exempt
+def json_signup(request):
+    try:
+        post_dataform = json.loads(request.body.decode('utf-8'))
+    except ValueError as exc:
+        return HttpResponseBadRequest()
+    form = UserCreationForm(data=post_dataform)
+    if form.is_valid():
+        form.save()
+        return HttpResponse({}, status=201)
+    return HttpResponse(form.errors, status=400)

@@ -8,7 +8,7 @@ from rest_framework.authtoken import views
 from backent.api.views import router
 from backent.api.views import CurrentUserView
 
-from .views import signup
+from .views import json_signup, signup
 
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^token/', views.obtain_auth_token),
     url(r'^admin/', include(admin.site.urls), name='admin'),
     url(r'^signup/$', signup, name='signup'),
+    url(r'^json_signup/$', json_signup, name='json_signup'),
 ]
