@@ -1,10 +1,12 @@
 from django.contrib.auth import get_user_model
 
 from rest_framework.decorators import detail_route
+from rest_framework.decorators import permission_classes
 from rest_framework import generics
 from rest_framework import routers
 from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from . import models
@@ -21,7 +23,7 @@ class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
     lookup_field = 'slug'
 
-    @detail_route(methods=['post'])
+    @detail_route(methods=['post'], permission_classes=(IsAuthenticated, ))
     def like(self, request, slug=None):
         event = self.get_object()
         like, created = models.EventLike.objects.get_or_create(
