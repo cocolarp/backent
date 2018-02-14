@@ -1,17 +1,20 @@
 import os
 import dj_database_url
 
+ENVIRONMENT = os.environ.get('ENVIRONMENT', 'prod')
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
+if ENVIRONMENT == 'dev':
+    SECRET_KEY = 'dev-secret-key'
+else:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = ENVIRONMENT == 'dev'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = ['*']
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -108,9 +111,15 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=500)
 db_from_env.pop('ENGINE', None)  # ensure we keep using postgis
 DATABASES['default'].update(db_from_env)
-DATABASES['default']['TEST'] = {'NAME': DATABASES['default']['NAME']}
 
-CORS_ORIGIN_ALLOW_ALL = os.environ.get('CORS_ORIGIN_ALLOW_ALL', True)
+if ENVIRONMENT == 'dev':
+    DATABASES['default']['TEST'] = {'NAME': DATABASES['default']['NAME']}
+    CORS_ORIGIN_ALLOW_ALL = True
+    ALLOWED_HOSTS = ['*']
+else:
+    CORS_ORIGIN_ALLOW_ALL = os.environ.get('CORS_ORIGIN_ALLOW_ALL', 'False') == 'True'
+    CORS_ORIGIN_WHITELIST = os.environ.get('CORS_ORIGIN_WHITELIST', '').split(',')
+    ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -122,4 +131,4 @@ REST_FRAMEWORK = {
 }
 
 GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('GOOGLE_RECAPTCHA_SECRET_KEY', None)
-HAS_RECAPTCHA = GOOGLE_RECAPTCHA_SECRET_KEY is not None
+HAS_RECAPTCHA = ENVIRONMENT != 'dev' and GOOGLE_RECAPTCHA_SECRET_KEY is not None
