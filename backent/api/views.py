@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 from rest_framework.decorators import detail_route
-from rest_framework.decorators import permission_classes
 from rest_framework import generics
 from rest_framework import routers
 from rest_framework import status
@@ -19,9 +19,17 @@ from .serializers import (
 
 
 class EventViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = models.Event.objects.all()
     serializer_class = EventSerializer
     lookup_field = 'slug'
+
+    def get_queryset(self):
+        now = timezone.now()
+        return models.Event.objects.filter(
+            start__gte=now,
+        ).prefetch_related(
+            'location',
+            'organization'
+        )
 
     @detail_route(methods=['post'], permission_classes=(IsAuthenticated, ))
     def like(self, request, slug=None):
@@ -59,20 +67,8 @@ class CurrentUserView(generics.RetrieveAPIView):
         serializer = self.get_serializer(current_user)
         return Response(serializer.data)
 
-    @detail_route(methods=['post'])
-    def set_password(self, request, pk=None):
-        user = self.get_object()
-        serializer = PasswordSerializer(data=request.data)
-        if serializer.is_valid():
-            user.set_password(serializer.data['password'])
-            user.save()
-            return Response({'status': 'password set'})
-        else:
-            return Response(serializer.errors,
-                            status=status.HTTP_400_BAD_REQUEST)
-
 
 router = routers.DefaultRouter()
-router.register(r'events', EventViewSet)
+router.register(r'events', EventViewSet, base_name='event')
 router.register(r'locations', LocationViewSet)
 router.register(r'organizations', OrganizationViewSet)
