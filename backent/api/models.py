@@ -26,6 +26,7 @@ class NameSlugMixin(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['slug']
 
     def __str__(self):
         return self.name
