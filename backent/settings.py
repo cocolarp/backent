@@ -79,7 +79,7 @@ LOGGING = {
     }
 }
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'backent',
     'backent.api',
 
@@ -96,9 +96,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-)
+]
 
-MIDDLEWARE = (
+MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -110,7 +110,19 @@ MIDDLEWARE = (
     'django.middleware.http.ConditionalGetMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
+
+if ENVIRONMENT == 'dev':
+    INSTALLED_APPS += [
+        'debug_toolbar'
+    ]
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+    INTERNAL_IPS = [
+        '127.0.0.1',
+    ]
+
 
 TEMPLATES = [
     {

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import include, url
 
 from django.contrib import admin
@@ -19,3 +20,9 @@ urlpatterns = [
     url(r'^signup/$', signup, name='signup'),
     url(r'^json_signup/$', json_signup, name='json_signup'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
