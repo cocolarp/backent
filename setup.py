@@ -16,7 +16,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'dj-database-url>=0.4.1',
-        'Django>=1.11,<2',
+        'Django>=2',
         'psycopg2>=2.6.2',
         'whitenoise>=3.3.0',
         'djangorestframework',
