@@ -78,7 +78,7 @@ class Location(NameSlugMixin):
     coords = gis_models.PointField(geography=True, blank=True, null=True)
 
     def __str__(self):
-        return "{0.address}, {0.zipcode}, {0.country}".format(self)
+        return "{0.name} ({0.address}, {0.zipcode}, {0.country})".format(self)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

@@ -59,6 +59,18 @@ class CurrentUserView(generics.RetrieveAPIView):
         serializer = self.get_serializer(current_user)
         return Response(serializer.data)
 
+    @detail_route(methods=['post'])
+    def set_password(self, request, pk=None):
+        user = self.get_object()
+        serializer = PasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            user.set_password(serializer.data['password'])
+            user.save()
+            return Response({'status': 'password set'})
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+
 
 router = routers.DefaultRouter()
 router.register(r'events', EventViewSet)
