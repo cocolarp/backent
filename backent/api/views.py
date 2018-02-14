@@ -54,7 +54,7 @@ class CurrentUserView(generics.RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         current_user = request.user
-        if current_user.is_anonymous():
+        if current_user.is_anonymous:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
         serializer = self.get_serializer(current_user)
         return Response(serializer.data)
