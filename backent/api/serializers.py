@@ -32,7 +32,6 @@ class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
             'url',
             'slug',
             'name',
-            'currency'
         )
 
 
@@ -54,9 +53,16 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'summary',
             'description',
             'price',
+            'npc_price',
+            'currency',
             'start',
-            'end',
+            'event_format',
             'external_url',
+            'facebook_event',
+            'facebook_page',
+            'facebook_group',
+            'player_signup_page',
+            'npc_signup_page',
         )
 
 
