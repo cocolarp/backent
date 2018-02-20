@@ -65,6 +65,7 @@ class EventLike(models.Model):
 
 
 class Event(NameSlugMixin):
+    slug = models.SlugField(max_length=255)
     created_by = models.ForeignKey('backent.User', on_delete=models.CASCADE)
     organization = models.ForeignKey('backent_api.Organization', on_delete=models.CASCADE)
     location = models.ForeignKey('backent_api.Location', on_delete=models.CASCADE)
@@ -97,6 +98,9 @@ class Event(NameSlugMixin):
     facebook_group = models.URLField(max_length=255, blank=True, null=True)
     player_signup_page = models.URLField(max_length=255, blank=True, null=True)
     npc_signup_page = models.URLField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        unique_together = (('name', 'start'),)
 
 
 class Organization(NameSlugMixin):
