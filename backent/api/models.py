@@ -19,6 +19,18 @@ CURRENCY_CHOICES = (
     (CURRENCY_USD, _("US Dollars ($)")),
 )
 
+EVENT_FORMAT_HOURS = 'hours'
+EVENT_FORMAT_SHORT = 'short'
+EVENT_FORMAT_MEDIUM = 'medium'
+EVENT_FORMAT_LONG = 'long'
+
+EVENT_FORMAT_CHOICES = (
+    (EVENT_FORMAT_HOURS, _("A few hours")),
+    (EVENT_FORMAT_SHORT, _("A whole day")),
+    (EVENT_FORMAT_MEDIUM, _("Two to three days")),
+    (EVENT_FORMAT_LONG, _("More than three days")),
+)
+
 
 class NameSlugMixin(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
@@ -59,17 +71,38 @@ class Event(NameSlugMixin):
     summary = models.TextField()
     description = models.TextField()
     external_url = models.URLField(max_length=255)
-    price = models.IntegerField(help_text="Price in cents of the default currency")
+    price = models.IntegerField(
+        verbose_name=_(u"price (player)"),
+        help_text="To be expressed in cents of the event's currency",
+    )
+    npc_price = models.IntegerField(
+        verbose_name=_(u"price (NPC)"),
+        help_text="To be expressed in cents of the event's currency",
+        blank=True,
+        null=True,
+    )
     start = models.DateTimeField(verbose_name=_(u"start"))
-    end = models.DateTimeField(verbose_name=_(u"end"))
-
-
-class Organization(NameSlugMixin):
+    event_format = models.CharField(
+        max_length=32,
+        choices=EVENT_FORMAT_CHOICES,
+        default=EVENT_FORMAT_SHORT,
+    )
     currency = models.CharField(
         max_length=32,
         choices=CURRENCY_CHOICES,
         default=CURRENCY_EUR,
     )
+    facebook_event = models.URLField(max_length=255, blank=True, null=True)
+    facebook_page = models.URLField(max_length=255, blank=True, null=True)
+    facebook_group = models.URLField(max_length=255, blank=True, null=True)
+    player_signup_page = models.URLField(max_length=255, blank=True, null=True)
+    npc_signup_page = models.URLField(max_length=255, blank=True, null=True)
+
+
+class Organization(NameSlugMixin):
+    """Register an event's organizer. Except for its name, we don't have much info yet :/
+    """
+    pass
 
 
 class Location(NameSlugMixin):
