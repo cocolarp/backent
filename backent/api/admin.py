@@ -18,13 +18,23 @@ class MyDate(admin.widgets.AdminSplitDateTime):
         return value
 
 
-@admin.register(models.Event, models.Location, models.Organization)
-class EventAdmin(admin.ModelAdmin):
+@admin.register(models.Location, models.Organization)
+class GenericAdmin(admin.ModelAdmin):
     exclude = ('slug',)
 
     formfield_overrides = {
         django_models.DateTimeField: {'widget': MyDate},
     }
+
+
+@admin.register(models.Event)
+class EventAdmin(GenericAdmin):
+    list_display = ('name', 'location_name', 'start',)
+
+    def location_name(self, obj):
+        return obj.location.name
+
+    location_name.admin_order_field  = 'location__name'
 
 
 admin.site.register(models.EventLike)
