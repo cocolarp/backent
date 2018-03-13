@@ -20,3 +20,7 @@ $ ENVIRONMENT=dev python manage.py runserver
 ```
 
 Your app should now be running on [localhost:8000](http://localhost:8000/).
+
+## LICENSE
+
+MIT
