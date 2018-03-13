@@ -1,9 +1,9 @@
 # Backent
 
-A Backend for Events.
+A Backend that stores events and their locations, and serves them using an API.
 
 ## Running Locally
-Install the [Heroku Toolbelt](https://toolbelt.heroku.com/) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+
 
 ```sh
 
@@ -15,36 +15,8 @@ $ createdb backent
 
 $ python manage.py migrate
 $ python manage.py collectstatic
+$ ENVIRONMENT=dev python manage.py runserver
 
-$ heroku local
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-
-## Deploying
-
-Use the cedar-14 stack as the current one is not yet suitable for GEOS.
-https://blog.trailblazingtech.com/running-geodjango-on-heroku-august-2017-aee97fbb7f7c
-
-```sh
-$ heroku create
-
-$ make deploy
-
-$ heroku open
-```
-
-##  Troubleshooting
-
-```sh
-$ heroku config:set VAR=xxx VAR2=yyy
-$ heroku pg:reset DATABASE_URL
-```
-
-
-## Documentation
-
-For more information about using Python on Heroku, see these Dev Center articles:
-
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
+Your app should now be running on [localhost:8000](http://localhost:8000/).
