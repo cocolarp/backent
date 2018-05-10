@@ -96,6 +96,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+
+    'mapwidgets',
 ]
 
 MIDDLEWARE = [
@@ -171,3 +173,16 @@ REST_FRAMEWORK = {
 
 GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('GOOGLE_RECAPTCHA_SECRET_KEY', None)
 HAS_RECAPTCHA = ENVIRONMENT != 'dev' and GOOGLE_RECAPTCHA_SECRET_KEY is not None
+
+GOOGLE_MAPS_JAVASCRIPT_API_KEY = os.environ.get('GOOGLE_MAPS_JAVASCRIPT_API_KEY', None)
+
+MAP_WIDGETS = {
+    'GOOGLE_MAP_API_KEY': GOOGLE_MAPS_JAVASCRIPT_API_KEY,
+    'LANGUAGE': 'fr',
+    'GooglePointFieldWidget': (
+        ('zoom', 14),
+        ('mapCenterLocationName', 'paris'),
+        ('GooglePlaceAutocompleteOptions', {'componentRestrictions': {'country': 'fr'}}),
+        ('markerFitZoom', 12),
+    ),
+}

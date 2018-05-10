@@ -25,6 +25,7 @@ setup(
         'requests',
         'django-widget-tweaks',
         'django-cors-headers',
+        'django-map-widgets',
     ],
     classifiers=[
         "Development Status :: 5 - Production/Stable",

@@ -1,7 +1,10 @@
 from time import gmtime, strftime
 
 from django.contrib import admin
+from django.contrib.gis.db import models as gis_models
 from django.db import models as django_models
+
+from mapwidgets.widgets import GooglePointFieldWidget
 
 from . import models
 
@@ -24,6 +27,7 @@ class GenericAdmin(admin.ModelAdmin):
 
     formfield_overrides = {
         django_models.DateTimeField: {'widget': MyDate},
+        gis_models.PointField: {"widget": GooglePointFieldWidget(attrs={'autocomplete': 'off'})},
     }
 
 
