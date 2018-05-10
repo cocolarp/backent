@@ -182,7 +182,6 @@ MAP_WIDGETS = {
     'GooglePointFieldWidget': (
         ('zoom', 14),
         ('mapCenterLocationName', 'paris'),
-        ('GooglePlaceAutocompleteOptions', {'componentRestrictions': {'country': 'fr'}}),
         ('markerFitZoom', 12),
     ),
 }
