@@ -17,8 +17,6 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
             'slug',
             'name',
             'address',
-            'zipcode',
-            'country',
             'latitude',
             'longitude',
         )

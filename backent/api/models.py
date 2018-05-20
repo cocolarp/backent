@@ -7,15 +7,20 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
-from django_countries.fields import CountryField
 from rest_framework.authtoken.models import Token
 
 
+CURRENCY_CHF = 'CHF'
 CURRENCY_EUR = 'EUR'
+CURRENCY_GBP = 'GBP'
+CURRENCY_SEK = 'SEK'
 CURRENCY_USD = 'USD'
 
 CURRENCY_CHOICES = (
+    (CURRENCY_CHF, _("Swiss Francs (CHF)")),
     (CURRENCY_EUR, _("Euros (€)")),
+    (CURRENCY_GBP, _("British pound (£)")),
+    (CURRENCY_SEK, _("Swedish Krona (kr)")),
     (CURRENCY_USD, _("US Dollars ($)")),
 )
 
@@ -110,13 +115,11 @@ class Organization(NameSlugMixin):
 
 
 class Location(NameSlugMixin):
-    address = models.CharField(max_length=255)
-    zipcode = models.CharField(max_length=255)
-    country = CountryField()
+    address = models.CharField(max_length=512)
     coords = gis_models.PointField(geography=True, blank=True, null=True)
 
     def __str__(self):
-        return "{0.name} ({0.address}, {0.zipcode}, {0.country})".format(self)
+        return "{0.name} ({0.address})".format(self)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

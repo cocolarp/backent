@@ -14,9 +14,7 @@
         "fields": {
             "slug": "chateau-rouge",
             "name": "Chateau Rouge",
-            "address": "23 rue Cambon",
-            "zipcode": "75008",
-            "country": "FR",
+            "address": "23 rue Cambon, 75008 PARIS, FRANCE",
             "coords": "SRID=4326;POINT (2.677850527718526 48.40364978633041)"
         }
     },
@@ -26,9 +24,7 @@
         "fields": {
             "slug": "albania",
             "name": "ALBANIA",
-            "address": "8 shakalllakah Boom Selectah AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "zipcode": "31320",
-            "country": "AL",
+            "address": "8 shakalllakah Boom Selectah 65432 PARIS, FRANCE",
             "coords": "SRID=4326;POINT (35.15037972889198 33.09273939564886)"
         }
     },
