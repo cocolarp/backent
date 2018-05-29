@@ -1,0 +1,56 @@
+>>>>> WARN place 'route de St Triviers, 01480 Villeneuve' could not be found!
+>>>>> WARN place 'Parc naturel régional du Haut-Jura, Route de Genève - Longeray, 01200 Léaz' could not be found!
+>>>>> WARN place 'Parc Naturel régional du Luberon, Chemin de Biabaux, 04870 Saint Miche l'Observatoire' could not be found!
+>>>>> WARN place '04460 Pontiacq-Vieillepinte' could not be found!
+>>>>> ERROR short address '04460 Pontiacq-Vieillepinte' could not be found!  (has been fixed)
+>>>>> WARN place 'Parc naturel régional du Verdon, Route Riez, 04360 Moustiers-Sainte-Marie' could not be found!
+>>>>> WARN place 'Lieu-dit Escures, 14770 Saint-Jean-le-Blanc' could not be found!
+>>>>> WARN place 'Village gaulois, Le pont Binot, 16500 Esse' could not be found!
+>>>>> WARN place 'Mauzens-Miremont, 24260 Le Bugue' could not be found!
+>>>>> WARN place '24210 Terrasson-Lavilledieu' could not be found!
+>>>>> ERROR short address '24210 Terrasson-Lavilledieu' could not be found!  (has been fixed)
+>>>>> WARN place '32 rue du mont bart, Rue du Mont Bart, 25550 Bavans' could not be found!
+>>>>> WARN place '330 Route du Château, 26350 Saint-Bonnet de Valclérieux' could not be found!
+>>>>> WARN place '330, route du château, 26350 Saint-Bonnet de Valclérieux' could not be found!
+>>>>> WARN place 'CD 714, 27380 Radepont' could not be found!
+>>>>> WARN place 'Rue du Carreau de Bois II, 49500 Nyoiseau' could not be found!
+>>>>> WARN place 'Le Plan D'eau, Route D'apinac, 42550 Usson-en-Forez' could not be found!
+>>>>> WARN place '5 rue Javelin Pagnon,  42100 Saint-Etienne, Paris' could not be found!
+>>>>> WARN place 'Le Bois du Tay La Croix du Hêtre, 53160 Hambers' could not be found!
+>>>>> WARN place 'Lieu-dit Denais, 53290 Saint-Denis-d'Anjou' could not be found!
+>>>>> WARN place 'Lieu-dit Denais, 53290 Saint-Denis-d'Anjou' could not be found!
+>>>>> WARN place 'Fort Pélissier, Les Vaines Terres), 54550 Bainville-sur-Madon' could not be found!
+>>>>> WARN place 'Les Vaines Terres, 54390 Bainville-Sur-Madon' could not be found!
+>>>>> ERROR short address '54390 Bainville-Sur-Madon' could not be found!  (has been fixed)
+>>>>> WARN place 'Université Lille 1, Avenue Carl Gauss, 59650 Villeneuve-d'Ascq' could not be found!
+>>>>> WARN place 'lieu-dit Grande Vienne, 61210 Putanges' could not be found!
+>>>>> WARN place 'Hameau Marcevol, 66320 Arboussols' could not be found!
+>>>>> WARN place 'Rue du Fort, 67116 Reichstett' could not be found!
+>>>>> WARN place 'Lieu dit La Poterie, 72350 Saint-Denis-d'Orques' could not be found!
+>>>>> WARN place '26 allée du Chef d’escadron de Guillebon, Jardin Atlantique, 75014 Paris' could not be found!
+>>>>> WARN place 'Lieu dit Le Pech, 761, Chemin du Château, 82400 Goudourville' could not be found!
+>>>>> WARN place 'RD3, 83470 Ollières' could not be found!
+>>>>> WARN place 'Parc Naturel régional du Luberon, Col du Pointu, 84480 Buoux' could not be found!
+>>>>> WARN place 'Domaine de la Boulaie, La Boulaie, 85590 Treize-Vents, Pays De La Loire' could not be found!
+>>>>> WARN place 'Fort Ordener, Rue de Meroux, 90400 Vézelois' could not be found!
+>>>>> WARN place 'Salle Café-Jeux, Rond-Point du 8 mai, 95240 Cormeilles-en-Parisis' could not be found!
+>>>>> WARN place 'YWCA de Louette-St-Pierre, Route de la Malcampée 127, 5575 Louette-St-Pierre' could not be found!
+>>>>> WARN place '37 Route du Château d'Halloy, 5590 Ciney' could not be found!
+>>>>> WARN place 'Rabštejn nad Střelou 2, 331 62 Manětín' could not be found!
+>>>>> WARN place 'Karlovarská, 364 55 Valeč' could not be found!
+>>>>> WARN place 'Úsobí 1, 582 54 Úsobí, Vysočina' could not be found!
+>>>>> WARN place 'Over gården, Skolegade 7, 8700 Horsens' could not be found!
+>>>>> WARN place 'Little, 1331 Huia Rd, Auckland 0604' could not be found!
+>>>>> WARN place 'Zamkowa 1, 47-370 Moszna' could not be found!
+>>>>> WARN place 'Zamkowa 1, 47-370 Moszna' could not be found!
+>>>>> WARN place 'Arroyo Curcal, S/N, 18800 Baza, Granada' could not be found!
+>>>>> WARN place 'Partida del Molino Galan, s/n, 46369 Alborache, Valencia' could not be found!
+>>>>> WARN place 'Arch 61 Ewer St, SE1 0NR London' could not be found!
+>>>>> WARN place 'Fleet Road (A327), RG27 0PY Fleet, Hampshire' could not be found!
+>>>>> WARN place 'Lieu-dit Le Val Jouin, 56460 Lizio' could not be found!
+>>>>> WARN place '6 rue du Cardinal Paul Gouyon, 35000 Rennes' could not be found!
+>>>>> WARN place 'Rue du Fort, 67116 Reichstett' could not be found!
+>>>>> WARN place 'Ancienne Abbaye, 16190 Aignes-et-Puypéroux' could not be found!
+>>>>> WARN place 'Lieu-dit Villers-Canivet, 14420 Villers-Canivet' could not be found!
+>>>>> WARN place 'La Chapelle-Saint-Florent, 49410 Mauges-sur-Loire' could not be found!
+>>>>> ERROR short address '49410 Mauges-sur-Loire' could not be found!  (has been fixed)

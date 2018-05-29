@@ -22,10 +22,13 @@ setup(
         'djangorestframework',
         'django-countries',
         'pillow',
+        'dateparser',
+        'fuzzywuzzy',
         'requests',
         'django-widget-tweaks',
         'django-cors-headers',
         'django-map-widgets',
+        'python-google-places',
     ],
     classifiers=[
         "Development Status :: 5 - Production/Stable",

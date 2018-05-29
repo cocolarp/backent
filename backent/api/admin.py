@@ -21,7 +21,6 @@ class MyDate(admin.widgets.AdminSplitDateTime):
         return value
 
 
-@admin.register(models.Location, models.Organization)
 class GenericAdmin(admin.ModelAdmin):
     exclude = ('slug',)
 
@@ -31,14 +30,20 @@ class GenericAdmin(admin.ModelAdmin):
     }
 
 
+@admin.register(models.Location)
+class LocationAdmin(GenericAdmin):
+    list_display = ('name', 'address')
+
+
+@admin.register(models.Organization)
+class OrganizationAdmin(GenericAdmin):
+    list_display = ('name',)
+
+
 @admin.register(models.Event)
 class EventAdmin(GenericAdmin):
-    list_display = ('name', 'location_name', 'start',)
-
-    def location_name(self, obj):
-        return obj.location.name
-
-    location_name.admin_order_field  = 'location__name'
+    list_display = ('name', 'organization', 'location', 'start',)
+    list_display_links = ('name', 'organization', 'location')
 
 
 admin.site.register(models.EventLike)
