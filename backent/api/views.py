@@ -20,13 +20,12 @@ from .serializers import (
 
 class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
-    lookup_field = 'slug'
 
     def get_queryset(self):
         now = timezone.now()
         return models.Event.objects.filter(
             start__gte=now,
-        ).prefetch_related(
+        ).select_related(
             'location',
             'organization'
         )
@@ -47,13 +46,11 @@ class EventViewSet(viewsets.ReadOnlyModelViewSet):
 class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Location.objects.all()
     serializer_class = LocationSerializer
-    lookup_field = 'slug'
 
 
 class OrganizationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Organization.objects.all()
     serializer_class = OrganizationSerializer
-    lookup_field = 'slug'
 
 
 class CurrentUserView(generics.RetrieveAPIView):

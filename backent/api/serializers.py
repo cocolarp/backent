@@ -5,15 +5,13 @@ from rest_framework import serializers
 from . import models
 
 
-class LocationSerializer(serializers.HyperlinkedModelSerializer):
+class LocationSerializer(serializers.ModelSerializer):
     longitude = serializers.FloatField(source='coords.x')
     latitude = serializers.FloatField(source='coords.y')
 
     class Meta:
         model = models.Location
-        extra_kwargs = {'url': {'lookup_field': 'slug'}}
         fields = (
-            'url',
             'slug',
             'name',
             'address',
@@ -22,28 +20,23 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
         )
 
 
-class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
+class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Organization
-        extra_kwargs = {'url': {'lookup_field': 'slug'}}
         fields = (
-            'url',
             'slug',
             'name',
         )
 
 
-class EventSerializer(serializers.HyperlinkedModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     organization = OrganizationSerializer()
     location = LocationSerializer()
 
     class Meta:
         model = models.Event
-        extra_kwargs = {
-            'url': {'lookup_field': 'slug'},
-        }
         fields = (
-            'url',
+            'pk',
             'slug',
             'name',
             'organization',
