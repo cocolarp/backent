@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import action
 from rest_framework import generics
 from rest_framework import routers
 from rest_framework import status
@@ -30,8 +30,8 @@ class EventViewSet(viewsets.ReadOnlyModelViewSet):
             'organization'
         )
 
-    @detail_route(methods=['post'], permission_classes=(IsAuthenticated, ))
-    def like(self, request, slug=None):
+    @action(methods=['post'], detail=True, permission_classes=(IsAuthenticated, ))
+    def like(self, request, pk=None):
         event = self.get_object()
         like, created = models.EventLike.objects.get_or_create(
             event=event,
