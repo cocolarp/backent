@@ -80,6 +80,8 @@ class Event(NameSlugMixin):
     price = models.IntegerField(
         verbose_name=_(u"price (player)"),
         help_text="To be expressed in cents of the event's currency",
+        blank=True,
+        null=True,
     )
     npc_price = models.IntegerField(
         verbose_name=_(u"price (NPC)"),
