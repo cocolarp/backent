@@ -1,3 +1,5 @@
+import itertools
+
 from django.conf import settings
 from django.contrib.gis.db import models as gis_models
 from django.db import models
@@ -49,10 +51,11 @@ class NameSlugMixin(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        try:
-            self.slug = slugify(self.name)
-        except IntegrityError:
-            self.slug = '{}-1'.format(slugify(self.name))  # FIXME: this is weak.
+        self.slug = orig = slugify(self.name)
+        for x in itertools.count(1):
+            if not self.__class__.objects.filter(slug=self.slug).exists():
+                break
+            self.slug = '%s-%d' % (orig, x)
         super().save(*args, **kwargs)
 
 
