@@ -6,6 +6,7 @@ from django.db import models
 from django.db import IntegrityError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django import forms
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -37,6 +38,20 @@ EVENT_FORMAT_CHOICES = (
     (EVENT_FORMAT_MEDIUM, _("Two to three days")),
     (EVENT_FORMAT_LONG, _("More than three days")),
 )
+
+EVENT_TAG_BEGINNER_FRIENDLY = 'beginner_friendly'
+EVENT_TAG_INTERNATIONAL = 'international'
+EVENT_TAG_PWD_FRIENDLY = 'pwd_friendly'
+EVENT_TAG_UNDERAGE_FRIENDLY = 'underage_friendly'
+
+EVENT_TAG_CHOICES = (
+    (EVENT_TAG_BEGINNER_FRIENDLY, _("Beginner friendly")),
+    (EVENT_TAG_INTERNATIONAL, _("International")),
+    (EVENT_TAG_PWD_FRIENDLY, _("PWD friendly")),
+    (EVENT_TAG_UNDERAGE_FRIENDLY, _("Underage friendly")),
+)
+
+EVENT_TAG_DICT = {key: value for (key, value) in EVENT_TAG_CHOICES}
 
 
 class NameSlugMixin(models.Model):
@@ -70,6 +85,16 @@ class EventLike(models.Model):
         related_name='likes',
         on_delete=models.CASCADE
     )
+
+
+class EventTag(models.Model):
+    name = models.CharField(
+        max_length=32,
+        choices=EVENT_TAG_CHOICES,
+    )
+
+    def __str__(self):
+        return str(EVENT_TAG_DICT[self.name])
 
 
 class Event(NameSlugMixin):
@@ -108,6 +133,8 @@ class Event(NameSlugMixin):
     facebook_group = models.URLField(max_length=255, blank=True, null=True)
     player_signup_page = models.URLField(max_length=255, blank=True, null=True)
     npc_signup_page = models.URLField(max_length=255, blank=True, null=True)
+
+    tags = models.ManyToManyField(EventTag, related_name='events', blank=True, null=True)
 
     class Meta:
         unique_together = (('name', 'start'),)

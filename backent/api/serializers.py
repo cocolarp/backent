@@ -29,9 +29,16 @@ class OrganizationSerializer(serializers.ModelSerializer):
         )
 
 
+class EventTagSerializer(serializers.RelatedField):
+
+    def to_representation(self, value):
+        return value.name
+
+
 class EventSerializer(serializers.ModelSerializer):
     organization = OrganizationSerializer()
     location = LocationSerializer()
+    tags = EventTagSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.Event
@@ -54,6 +61,7 @@ class EventSerializer(serializers.ModelSerializer):
             'facebook_group',
             'player_signup_page',
             'npc_signup_page',
+            'tags',
         )
 
 
