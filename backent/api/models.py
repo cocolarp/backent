@@ -1,4 +1,5 @@
 import itertools
+import textwrap
 
 from django.conf import settings
 from django.contrib.gis.db import models as gis_models
@@ -63,14 +64,15 @@ class NameSlugMixin(models.Model):
         ordering = ['slug']
 
     def __str__(self):
-        return self.name
+        return textwrap.shorten("{0.name}".format(self), 40)
 
     def save(self, *args, **kwargs):
-        self.slug = orig = slugify(self.name)
-        for x in itertools.count(1):
-            if not self.__class__.objects.filter(slug=self.slug).exists():
-                break
-            self.slug = '%s-%d' % (orig, x)
+        if not self.slug:
+            self.slug = orig = slugify(self.name)
+            for x in itertools.count(1):
+                if not self.__class__.objects.filter(slug=self.slug).exists():
+                    break
+                self.slug = '%s-%d' % (orig, x)
         super().save(*args, **kwargs)
 
 
@@ -85,6 +87,9 @@ class EventLike(models.Model):
         related_name='likes',
         on_delete=models.CASCADE
     )
+
+    def __str__(self):
+        return "Like from %s on %s" % (self.user, self.event)
 
 
 class EventTag(models.Model):
@@ -149,9 +154,6 @@ class Organization(NameSlugMixin):
 class Location(NameSlugMixin):
     address = models.CharField(max_length=512)
     coords = gis_models.PointField(geography=True, blank=True, null=True)
-
-    def __str__(self):
-        return "{0.name} ({0.address})".format(self)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

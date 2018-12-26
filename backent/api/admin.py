@@ -17,7 +17,7 @@ class MyDate(admin.widgets.AdminSplitDateTime):
     def value_from_datadict(self, data, files, name):
         value = super().value_from_datadict(data, files, name)
         if not value[1]:
-            value[1] = strftime('%H:%M:%S', gmtime())
+            value[1] = '00:00:00'  # default to 00:00:00
         return value
 
 
@@ -32,18 +32,30 @@ class GenericAdmin(admin.ModelAdmin):
 
 @admin.register(models.Location)
 class LocationAdmin(GenericAdmin):
+    ordering = ('name',)
     list_display = ('name', 'address')
 
 
 @admin.register(models.Organization)
 class OrganizationAdmin(GenericAdmin):
     list_display = ('name',)
+    ordering = ('name',)
 
 
 @admin.register(models.Event)
 class EventAdmin(GenericAdmin):
-    list_display = ('name', 'organization', 'location', 'start',)
-    list_display_links = ('name', 'organization', 'location')
+    ordering = ('-start',)
+    list_display = ('name', 'organization', 'location', 'start', 'event_format')
+    list_display_links = ('name', )
+    search_fields = ('name',)
+    list_filter = ('event_format', 'created_by',)
+    readonly_fields = ('created_by',)
+    filter_horizontal = ('tags',)
+
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'created_by', None) is None:
+            obj.created_by = request.user
+        obj.save()
 
 
 admin.site.register(models.EventLike)
