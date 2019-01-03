@@ -54,6 +54,24 @@ EVENT_TAG_CHOICES = (
 
 EVENT_TAG_DICT = {key: value for (key, value) in EVENT_TAG_CHOICES}
 
+LANGUAGE_DE = 'de'
+LANGUAGE_EN = 'en'
+LANGUAGE_ES = 'es'
+LANGUAGE_FR = 'fr'
+LANGUAGE_IT = 'it'
+LANGUAGE_RU = 'ru'
+
+LANGUAGE_CHOICES = (
+    (LANGUAGE_DE, _("German")),
+    (LANGUAGE_EN, _("English")),
+    (LANGUAGE_ES, _("Spanish")),
+    (LANGUAGE_FR, _("French")),
+    (LANGUAGE_IT, _("Italian")),
+    (LANGUAGE_RU, _("Russian")),
+)
+
+LANGUAGES_DICT = {key: value for (key, value) in LANGUAGE_CHOICES}
+
 
 class NameSlugMixin(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
@@ -102,6 +120,16 @@ class EventTag(models.Model):
         return str(EVENT_TAG_DICT[self.name])
 
 
+class Language(models.Model):
+    code = models.CharField(
+        max_length=32,
+        choices=LANGUAGE_CHOICES,
+    )
+
+    def __str__(self):
+        return str(LANGUAGES_DICT[self.code])
+
+
 class Event(NameSlugMixin):
     slug = models.SlugField(max_length=255)
     created_by = models.ForeignKey('backent.User', on_delete=models.CASCADE)
@@ -139,7 +167,9 @@ class Event(NameSlugMixin):
     player_signup_page = models.URLField(max_length=255, blank=True, null=True)
     npc_signup_page = models.URLField(max_length=255, blank=True, null=True)
 
-    tags = models.ManyToManyField(EventTag, related_name='events', blank=True, null=True)
+    tags = models.ManyToManyField(EventTag, related_name='events', blank=True)
+
+    languages_spoken = models.ManyToManyField(Language, related_name='events', blank=True)
 
     class Meta:
         unique_together = (('name', 'start'),)
