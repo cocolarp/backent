@@ -50,7 +50,7 @@ class EventAdmin(GenericAdmin):
     search_fields = ('name',)
     list_filter = ('event_format', 'created_by',)
     readonly_fields = ('created_by',)
-    filter_horizontal = ('tags',)
+    filter_horizontal = ('tags', 'languages_spoken')
 
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'created_by', None) is None:

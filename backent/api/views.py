@@ -25,6 +25,9 @@ class EventViewSet(viewsets.ReadOnlyModelViewSet):
         now = timezone.now()
         return models.Event.objects.filter(
             start__gte=now,
+        ).prefetch_related(
+            'tags',
+            'languages_spoken',
         ).select_related(
             'location',
             'organization'

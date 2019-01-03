@@ -35,10 +35,17 @@ class EventTagSerializer(serializers.RelatedField):
         return value.name
 
 
+class LanguageSerializer(serializers.RelatedField):
+
+    def to_representation(self, value):
+        return value.code
+
+
 class EventSerializer(serializers.ModelSerializer):
     organization = OrganizationSerializer()
     location = LocationSerializer()
     tags = EventTagSerializer(many=True, read_only=True)
+    languages = LanguageSerializer(many=True, read_only=True, source='languages_spoken')
 
     class Meta:
         model = models.Event
@@ -62,6 +69,7 @@ class EventSerializer(serializers.ModelSerializer):
             'player_signup_page',
             'npc_signup_page',
             'tags',
+            'languages',
         )
 
 
