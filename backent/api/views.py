@@ -1,5 +1,8 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from rest_framework.decorators import action
 from rest_framework import generics
@@ -20,6 +23,10 @@ from .serializers import (
 
 class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
+
+    @method_decorator(cache_page(settings.API_EVENT_LIST_CACHE_DURATION))
+    def list(self, request, format=None):
+        return super().list(request, format=format)
 
     def get_queryset(self):
         now = timezone.now()
