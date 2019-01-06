@@ -1,26 +1,19 @@
 from django.db import migrations
 
+from backent.api import enums
 from backent.api import models
 
 
 def populate_languages(apps, schema_editor):
     Language = apps.get_model('backent_api', 'Language')
-    Language.objects.get_or_create(code=models.LANGUAGE_DE)
-    Language.objects.get_or_create(code=models.LANGUAGE_EN)
-    Language.objects.get_or_create(code=models.LANGUAGE_ES)
-    Language.objects.get_or_create(code=models.LANGUAGE_FR)
-    Language.objects.get_or_create(code=models.LANGUAGE_IT)
-    Language.objects.get_or_create(code=models.LANGUAGE_RU)
+    for lang in enums.LANGUAGE_CHOICES:
+        Language.objects.get_or_create(code=lang[0])
 
 
 def unpopulate_languages(apps, schema_editor):
     Language = apps.get_model('backent_api', 'Language')
-    Language.objects.filter(code=models.LANGUAGE_DE).delete()
-    Language.objects.filter(code=models.LANGUAGE_FR).delete()
-    Language.objects.filter(code=models.LANGUAGE_EN).delete()
-    Language.objects.filter(code=models.LANGUAGE_ES).delete()
-    Language.objects.filter(code=models.LANGUAGE_IT).delete()
-    Language.objects.filter(code=models.LANGUAGE_RU).delete()
+    for lang in enums.LANGUAGE_CHOICES:
+        Language.objects.filter(code=lang[0]).delete()
 
 
 class Migration(migrations.Migration):
