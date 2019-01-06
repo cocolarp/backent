@@ -34,12 +34,14 @@ class GenericAdmin(admin.ModelAdmin):
 class LocationAdmin(GenericAdmin):
     ordering = ('name',)
     list_display = ('name', 'address')
+    search_fields = ('name', 'address')
 
 
 @admin.register(models.Organization)
 class OrganizationAdmin(GenericAdmin):
     list_display = ('name',)
     ordering = ('name',)
+    search_fields = ('name',)
 
 
 @admin.register(models.Event)
@@ -51,6 +53,7 @@ class EventAdmin(GenericAdmin):
     list_filter = ('event_format', 'created_by',)
     readonly_fields = ('created_by',)
     filter_horizontal = ('tags', 'languages_spoken')
+    autocomplete_fields = ('organization', 'location')
 
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'created_by', None) is None:
