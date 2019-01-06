@@ -81,15 +81,19 @@ class Event(NameSlugMixin):
     summary = models.TextField()
     description = models.TextField()
     external_url = models.URLField(max_length=255)
-    price = models.IntegerField(
+    price = models.DecimalField(
         verbose_name=_(u"price (player)"),
-        help_text="To be expressed in cents of the event's currency",
+        help_text="To be expressed in the event's currency",
+        max_digits=10,
+        decimal_places=2,
         blank=True,
         null=True,
     )
-    npc_price = models.IntegerField(
+    npc_price = models.DecimalField(
         verbose_name=_(u"price (NPC)"),
-        help_text="To be expressed in cents of the event's currency",
+        help_text="To be expressed in the event's currency",
+        max_digits=10,
+        decimal_places=2,
         blank=True,
         null=True,
     )
