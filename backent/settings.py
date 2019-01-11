@@ -153,7 +153,6 @@ db_from_env.pop('ENGINE', None)  # ensure we keep using postgis
 DATABASES['default'].update(db_from_env)
 
 if ENVIRONMENT == 'dev':
-    DATABASES['default']['TEST'] = {'NAME': DATABASES['default']['NAME']}
     CORS_ORIGIN_ALLOW_ALL = True
     ALLOWED_HOSTS = ['*']
 else:

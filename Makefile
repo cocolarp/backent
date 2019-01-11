@@ -39,3 +39,9 @@ resetdb: initdb
 
 reload_db: initdb
 	psql -d backent < scripts/reload_me.sql
+
+reset_test:
+	SECRET_KEY=caca ENVIRONMENT=dev python manage.py test
+
+test:
+	SECRET_KEY=caca ENVIRONMENT=dev python manage.py test --keepdb
