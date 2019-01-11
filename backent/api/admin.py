@@ -39,6 +39,7 @@ class LocationAdmin(GenericAdmin):
 
 @admin.register(models.Organization)
 class OrganizationAdmin(GenericAdmin):
+    search_fields = ('name',)
     list_display = ('name',)
     ordering = ('name',)
     search_fields = ('name',)
