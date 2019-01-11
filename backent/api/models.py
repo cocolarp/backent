@@ -133,8 +133,10 @@ class Organization(NameSlugMixin):
 
 
 class Location(NameSlugMixin):
-    address = models.CharField(max_length=512)
-    coords = gis_models.PointField(geography=True, blank=True, null=True)
+    address = models.CharField(max_length=512, blank=True, null=True,
+        help_text="Leave blank if the location is still inaccurate",
+    )
+    coords = gis_models.PointField(geography=True)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

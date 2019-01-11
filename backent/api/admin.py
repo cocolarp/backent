@@ -30,11 +30,28 @@ class GenericAdmin(admin.ModelAdmin):
     }
 
 
+class LocationNeedsModerationFilter(admin.SimpleListFilter):
+    title = 'needs moderation'
+    parameter_name = 'needs_moderation'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('address', 'Empty address'),
+        )
+
+    def queryset(self, request, queryset):
+        value = self.value()
+        if value == 'address':
+            return queryset.filter(address=None)
+        return queryset
+
+
 @admin.register(models.Location)
 class LocationAdmin(GenericAdmin):
     ordering = ('name',)
     list_display = ('name', 'address')
     search_fields = ('name', 'address')
+    list_filter = (LocationNeedsModerationFilter,)
 
 
 @admin.register(models.Organization)
@@ -45,13 +62,29 @@ class OrganizationAdmin(GenericAdmin):
     search_fields = ('name',)
 
 
+class EventNeedsModerationFilter(admin.SimpleListFilter):
+    title = 'needs moderation'
+    parameter_name = 'needs_moderation'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('cost', 'Unknown cost'),
+        )
+
+    def queryset(self, request, queryset):
+        value = self.value()
+        if value == 'cost':
+            return queryset.filter(price=None)
+        return queryset
+
+
 @admin.register(models.Event)
 class EventAdmin(GenericAdmin):
     ordering = ('-start',)
     list_display = ('name', 'organization', 'location', 'start', 'event_format')
     list_display_links = ('name', )
     search_fields = ('name',)
-    list_filter = ('event_format', 'created_by',)
+    list_filter = (EventNeedsModerationFilter, 'event_format', 'created_by',)
     readonly_fields = ('created_by',)
     filter_horizontal = ('tags', 'languages_spoken')
     autocomplete_fields = ('organization', 'location')
