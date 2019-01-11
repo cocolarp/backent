@@ -3,6 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
+    email = models.EmailField(unique=True)
     avatar = models.ImageField(blank=True, null=True)
     location = models.ForeignKey(
         'backent_api.Location',
