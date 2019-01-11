@@ -20,8 +20,7 @@ EVENT_FORMAT_MEDIUM = 'medium'
 EVENT_FORMAT_LONG = 'long'
 
 EVENT_FORMAT_CHOICES = (
-    (EVENT_FORMAT_HOURS, _("A few hours")),
-    (EVENT_FORMAT_SHORT, _("A whole day")),
+    (EVENT_FORMAT_SHORT, _("Less than 24 hours")),
     (EVENT_FORMAT_MEDIUM, _("Two to three days")),
     (EVENT_FORMAT_LONG, _("More than three days")),
 )
