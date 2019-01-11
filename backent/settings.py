@@ -184,7 +184,14 @@ MAP_WIDGETS = {
     ),
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_table',
+    }
+}
+
 if ENVIRONMENT == 'dev':
     API_EVENT_LIST_CACHE_DURATION = 0
 else:
-    API_EVENT_LIST_CACHE_DURATION = int(os.environ.get('API_EVENT_LIST_CACHE_DURATION', 60 * 30))
+    API_EVENT_LIST_CACHE_DURATION = int(os.environ.get('API_EVENT_LIST_CACHE_DURATION', 60 * 60 * 12))
