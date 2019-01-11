@@ -28,12 +28,14 @@ class NameSlugMixin(models.Model):
         return textwrap.shorten("{0.name}".format(self), 40)
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = orig = slugify(self.name)
-            for x in itertools.count(1):
-                if not self.__class__.objects.filter(slug=self.slug).exists():
-                    break
-                self.slug = '%s-%d' % (orig, x)
+        self.slug = orig = slugify(self.name)
+        for x in itertools.count(1):
+            conflicting_obj = self.__class__.objects.filter(slug=self.slug).order_by('pk').last()
+            if conflicting_obj is None:
+                break
+            if conflicting_obj.pk == self.pk:
+                break
+            self.slug = '%s-%d' % (orig, x)
         super().save(*args, **kwargs)
 
 
@@ -137,3 +139,13 @@ class Location(NameSlugMixin):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
+
+def force_save_all_models():
+    # Useful to reset all the slugs and the eventual modified_at properties.
+    for obj in Event.objects.all():
+        obj.save()
+    for obj in Organization.objects.all():
+        obj.save()
+    for obj in Location.objects.all():
+        obj.save()
