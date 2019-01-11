@@ -70,6 +70,8 @@ class EventSerializer(serializers.ModelSerializer):
             'npc_signup_page',
             'tags',
             'languages',
+            'created_at',
+            'updated_at',
         )
 
 
