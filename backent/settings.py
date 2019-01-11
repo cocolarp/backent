@@ -79,6 +79,7 @@ LOGGING = {
 
 INSTALLED_APPS = [
     'backent',
+    'backent.apps.BackentAdminConfig',
     'backent.api',
 
     'corsheaders',
@@ -87,7 +88,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'widget_tweaks',
 
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.gis',
