@@ -1,15 +1,23 @@
 from django.utils.translation import ugettext_lazy as _
 
+CURRENCY_CAD = 'CAD'
 CURRENCY_CHF = 'CHF'
+CURRENCY_DKK = 'DKK'
 CURRENCY_EUR = 'EUR'
 CURRENCY_GBP = 'GBP'
+CURRENCY_NOK = 'NOK'
+CURRENCY_RUB = 'RUB'
 CURRENCY_SEK = 'SEK'
 CURRENCY_USD = 'USD'
 
 CURRENCY_CHOICES = (
+    (CURRENCY_CAD, _("Canadian Dollars ($)")),
     (CURRENCY_CHF, _("Swiss Francs (CHF)")),
+    (CURRENCY_DKK, _("Danish Krone (kr)")),
     (CURRENCY_EUR, _("Euros (€)")),
     (CURRENCY_GBP, _("British pound (£)")),
+    (CURRENCY_NOK, _("Norwegian Krone (kr)")),
+    (CURRENCY_RUB, _("Russian ruble (₽)")),
     (CURRENCY_SEK, _("Swedish Krona (kr)")),
     (CURRENCY_USD, _("US Dollars ($)")),
 )
