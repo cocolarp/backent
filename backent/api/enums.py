@@ -14,7 +14,6 @@ CURRENCY_CHOICES = (
     (CURRENCY_USD, _("US Dollars ($)")),
 )
 
-EVENT_FORMAT_HOURS = 'hours'
 EVENT_FORMAT_SHORT = 'short'
 EVENT_FORMAT_MEDIUM = 'medium'
 EVENT_FORMAT_LONG = 'long'
