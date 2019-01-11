@@ -39,8 +39,3 @@ resetdb: initdb
 
 reload_db: initdb
 	psql -d backent < scripts/reload_me.sql
-
-deploy:
-	heroku config:set BUILD_WITH_GEO_LIBRARIES=1
-	git push heroku master
-	heroku run python manage.py migrate

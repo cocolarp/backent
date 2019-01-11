@@ -43,8 +43,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-TEST_RUNNER = 'backent.heroku_test_runner.HerokuDiscoverRunner'
-
 PROJECT_HRID = 'backent'
 
 AUTH_USER_MODEL = 'backent.User'
