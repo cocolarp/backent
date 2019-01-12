@@ -79,9 +79,9 @@ class Language(models.Model):
 
 class Event(NameSlugMixin):
     slug = models.SlugField(max_length=255)
-    created_by = models.ForeignKey('backent.User', on_delete=models.CASCADE)
-    organization = models.ForeignKey('backent_api.Organization', on_delete=models.CASCADE)
-    location = models.ForeignKey('backent_api.Location', on_delete=models.CASCADE)
+    created_by = models.ForeignKey('backent.User', on_delete=models.PROTECT)
+    organization = models.ForeignKey('backent_api.Organization', on_delete=models.PROTECT)
+    location = models.ForeignKey('backent_api.Location', blank=True, null=True, on_delete=models.SET_NULL)
     summary = models.TextField()
     description = models.TextField()
     external_url = models.URLField(max_length=255)
