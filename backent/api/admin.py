@@ -69,12 +69,21 @@ class EventNeedsModerationFilter(admin.SimpleListFilter):
     def lookups(self, request, model_admin):
         return (
             ('cost', 'Unknown cost'),
+            ('location', 'No location given'),
+            ('address', 'Inaccurate address'),
         )
 
     def queryset(self, request, queryset):
         value = self.value()
         if value == 'cost':
             return queryset.filter(price=None)
+        if value == 'location':
+            return queryset.filter(location=None)
+        if value == 'address':
+            return queryset.filter(
+                location__isnull=False,
+                location__address=None,
+            )
         return queryset
 
 
