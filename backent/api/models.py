@@ -3,6 +3,7 @@ import textwrap
 
 from django.conf import settings
 from django.contrib.gis.db import models as gis_models
+from django.core.cache import cache
 from django.db import models
 from django.db import IntegrityError
 from django.db.models.signals import post_save
@@ -39,6 +40,7 @@ class NameSlugMixin(models.Model):
                 break
             self.slug = '%s-%d' % (orig, x)
         super().save(*args, **kwargs)
+        cache.clear()
 
 
 class EventLike(models.Model):
