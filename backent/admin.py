@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import admin
+from django.contrib.admin.models import LogEntry
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
@@ -53,3 +54,24 @@ class UserChangeForm(forms.ModelForm):
 class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
+
+
+@admin.register(LogEntry)
+class LogEntryAdmin(admin.ModelAdmin):
+    date_hierarchy = 'action_time'
+    readonly_fields = [field.name for field in LogEntry._meta.get_fields()]
+    list_filter = ['user', 'content_type']
+    search_fields = ['object_repr', 'change_message']
+    list_display = ['action_time', 'user', 'content_type', '__str__']
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def queryset(self, request):
+        return super().queryset(request).prefetch_related('content_type')
