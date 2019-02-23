@@ -24,7 +24,6 @@ from .serializers import (
 class EventViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EventSerializer
 
-    @method_decorator(cache_page(settings.API_EVENT_LIST_CACHE_DURATION))
     def list(self, request, format=None):
         return super().list(request, format=format)
 
