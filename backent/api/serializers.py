@@ -46,6 +46,7 @@ class EventSerializer(serializers.ModelSerializer):
     location = LocationSerializer()
     tags = EventTagSerializer(many=True, read_only=True)
     languages = LanguageSerializer(many=True, read_only=True, source='languages_spoken')
+    like_count = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Event
@@ -72,7 +73,11 @@ class EventSerializer(serializers.ModelSerializer):
             'languages',
             'created_at',
             'updated_at',
+            'like_count',
         )
+
+    def get_like_count(self, obj):
+        return obj.likes.count()
 
 
 class LikedEventSerializer(serializers.RelatedField):
