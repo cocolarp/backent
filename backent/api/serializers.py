@@ -83,7 +83,7 @@ class EventSerializer(serializers.ModelSerializer):
 class LikedEventSerializer(serializers.RelatedField):
 
     def to_representation(self, value):
-        return value.event.slug
+        return value.event.pk
 
 
 class CurrentUserSerializer(serializers.ModelSerializer):

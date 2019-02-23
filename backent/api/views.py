@@ -65,7 +65,13 @@ class OrganizationViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CurrentUserView(generics.RetrieveAPIView):
     serializer_class = CurrentUserSerializer
-    queryset = get_user_model().objects.all()
+    queryset = (
+        get_user_model()
+        .objects
+        .prefetch_related(
+            'event__likes',
+        )
+    )
 
     def retrieve(self, request, *args, **kwargs):
         current_user = request.user
